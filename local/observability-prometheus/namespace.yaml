@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "dv-local-observability-prometheus" 
+  labels:
+    environment: "dv"
+    workspace: "platform-team"
+    workload: "observability"
+    deploymentTarget: "observability-prometheus"
+    someLabel: some-value
