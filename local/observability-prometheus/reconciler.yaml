@@ -1,0 +1,26 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: "observability-prometheus"
+  namespace: flux-system
+spec:
+  interval: 30s
+  url: "https://github.com/microsoft/kalypso-svc-gitops"
+  ref:
+    branch: "dev"
+  secretRef:
+      name: repo-secret    
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: "observability-prometheus"
+  namespace: flux-system
+spec:
+  interval: 30s
+  targetNamespace: "dv-local-observability-prometheus"
+  sourceRef:
+    kind: GitRepository
+    name: "observability-prometheus"
+  path: "./prometheus" 
+  prune: true
